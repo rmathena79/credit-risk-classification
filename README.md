@@ -13,26 +13,38 @@ With a standard environment from class, just run all cells in credit_risk_classi
 
 ## Overview of the Analysis
 
-In this section, describe the analysis you completed for the machine learning models used in this Challenge. This might include:
+The purpose of this analysis is to create and evaluate a model for predicting credit worthiness of borrowers. This analysis is based on certain characteristics of loans and borrowers:
 
-* Explain the purpose of the analysis.
-* Explain what financial information the data was on, and what you needed to predict.
-* Provide basic information about the variables you were trying to predict (e.g., `value_counts`).
-* Describe the stages of the machine learning process you went through as part of this analysis.
-* Briefly touch on any methods you used (e.g., `LogisticRegression`, or any other algorithms).
+* Loan size
+* Loan interest rate
+* Borrower income
+* Borrower debt-to-income ration
+* Borrower number of accounts
+* Borrower derogatory marks
+* Borrower total debt
+
+The prediction is to classify a loan as either "healthy" or "high-risk". Note these terms have not been defined in the source data.
+
+To build the model, the features (listed above) are all scaled. Then features and labels are split into training (75%) and test (25%) sets. A Logistic Regression is done to build the model from the training data. Finally, predictions are done with the test feature set and compared to the test labels to measure the model's usefulness.
 
 ## Results
+
+* Logistic Regression Model:
+    * 
 
 Using bulleted lists, describe the accuracy scores and the precision and recall scores of all machine learning models.
 
 * Machine Learning Model 1:
-    * Description of Model 1 Accuracy, Precision, and Recall scores.
+    * **Healthy Loans**: Precision 1.00, Recall 0.99, F-Scoare 1.00
+    * **High-Risk Loans**: Precision 0.84, Recall 0.94, F-Scoare 0.89
+    * **Macro Average**: Precision 0.92, Recall 0.97, F-Scoare 0.94
+    * **Weighted Average**: Precision 0.99, Recall 0.99, F-Scoare 0.99
+    * **Overall Accuracy**: 0.99
 
 ## Summary
 
-Summarize the results of the machine learning models, and include a recommendation on the model to use, if any. For example:
+If a loan is actually healthy, this model correctly determines it to be healthy over 99% of the time. So there is little risk of falsely classifying a loan as high-risk. Loans which are actually high-risk are harder to handle. Precision is only 0.84 in this category, meaning that 16% of the time, a high-risk loan will be incorrectly classified as healthy.
 
-* Which one seems to perform best? How do you know it performs best?
-* Does performance depend on the problem we are trying to solve? (For example, is it more important to predict the `1`'s, or predict the `0`'s? )
+Overall, if the model predicts that a loan is high-risk, it can be trusted. But if it predicts that a loan is healthy, further analysis is recommended.
 
-If you do not recommend any of the models, please justify your reasoning.
+Recommendations depend on business needs. This model could be helpful to quickly reject most potential high-risk borrowers, but to further reduce the risk of issuing a high-risk loan, further analysis will be needed for any application who passes through that initial check. I do not recommend relying on this model to make final determinations of loan risk, since a significant number of high-risk loans will be incorrectly determined to be health.
